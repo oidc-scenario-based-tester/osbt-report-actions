@@ -5,7 +5,7 @@ runs:
   using: "composite"
   steps:
     - name: export report
-      rrun: |
+      run: |
         curl http://localhost:54454/report > report.md
       shell: bash
     - name: create issue
