@@ -16,7 +16,7 @@ runs:
         labels: |
           osbt
     - name: export test data
-      run: curl http://localhost:54454/data > result.json
+      run: curl http://localhost:54454/results > result.json
       shell: bash
     - name: upload artifact
       uses: actions/upload-artifact@v2
