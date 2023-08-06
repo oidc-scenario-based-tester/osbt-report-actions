@@ -1,0 +1,25 @@
+name: 'OSBT Report Action'
+description: 'Report actions for osbt'
+
+runs:
+  using: "composite"
+  steps:
+    - name: export report
+      rrun: |
+        curl http://localhost:54454/report > report.md
+      shell: bash
+    - name: create issue
+      uses: peter-evans/create-issue-from-file@v3
+      with:
+        title: osbt test result
+        content-filepath: ./report.md
+        labels: |
+          osbt
+    - name: export test data
+      run: curl http://localhost:54454/data > result.json
+      shell: bash
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: result.json
+        path: ./result.json
